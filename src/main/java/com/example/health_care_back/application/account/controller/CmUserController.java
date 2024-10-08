@@ -1,13 +1,10 @@
 package com.example.health_care_back.application.account.controller;
 
 import com.example.health_care_back.application.account.service.UserCmService;
-import com.example.health_care_back.application.account.service.UserCmService;
 import com.example.health_care_back.application.common.response.CommonResponse;
 import com.example.health_care_back.application.vo.UserVO;
 import com.example.health_care_back.infra.config.security.user.LoginUser;
-import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.MediaType;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
