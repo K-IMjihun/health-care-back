@@ -1,5 +1,6 @@
 package com.example.health_care_back.application.account.controller;
 
+import com.example.health_care_back.application.account.controller.dto.AuthorityUpdateDTO;
 import com.example.health_care_back.application.account.controller.dto.CheckExistenceUserDTO;
 import com.example.health_care_back.application.account.controller.dto.CreateUserDTO;
 import com.example.health_care_back.application.account.service.UserAnService;
@@ -25,8 +26,13 @@ public class AnUserController {
 
     // 메일 중복 체크
     @GetMapping("/existence")
-    public CommonResponse<Boolean> getExistence(@Valid CheckExistenceUserDTO dto) {
+    public CommonResponse<Boolean> getExistence(@Valid @RequestBody CheckExistenceUserDTO dto) {
         return CommonResponse.success(userAnService.getExistence(dto));
     }
 
+    // 일반유저 권한 변경
+    @PutMapping("/authority-update")
+    public CommonResponse<Boolean> authorityUpdate(@Valid @RequestBody AuthorityUpdateDTO dto){
+        return CommonResponse.success(userAnService.authorityUpdate(dto));
+    }
 }
