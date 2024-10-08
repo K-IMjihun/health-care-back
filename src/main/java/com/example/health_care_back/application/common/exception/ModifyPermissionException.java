@@ -9,6 +9,7 @@ public class ModifyPermissionException extends CommonException  {
     public enum ModifyPermissionExceptionCode implements ResponseCode {
         UNAUTHORIZED_ACCESS_EXCEPTION("MPE-001", "unauthorized access"),
         CANNOT_MODIFY_SAME_AUTHORITY_EXCEPTION("MPE-002", "cannot modify with the same authority"),
+        SYSTEM_KEY_MISMATCH_EXCEPTION("MPE-003", "System key mismatch")
         ;
 
 
