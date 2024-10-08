@@ -33,8 +33,4 @@ public class ModifyPermissionException extends CommonException  {
     public ModifyPermissionException(ModifyPermissionExceptionCode code, String message) {
         super(code, message);
     }
-
-    public ModifyPermissionException(String message) {
-        super(ModifyPermissionExceptionCode.UNAUTHORIZED_ACCESS_EXCEPTION, message);
-    }
 }
