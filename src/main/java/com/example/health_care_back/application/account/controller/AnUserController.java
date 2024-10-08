@@ -1,5 +1,6 @@
 package com.example.health_care_back.application.account.controller;
 
+import com.example.health_care_back.application.account.controller.dto.CheckExistenceUserDTO;
 import com.example.health_care_back.application.account.controller.dto.CreateUserDTO;
 import com.example.health_care_back.application.account.service.UserAnService;
 import com.example.health_care_back.application.common.response.CommonResponse;
@@ -20,6 +21,12 @@ public class AnUserController {
     public CommonResponse<Void> signUp(@Valid @RequestBody CreateUserDTO dto) {
         userAnService.signUp(dto);
         return CommonResponse.success();
+    }
+
+    // 메일 중복 체크
+    @GetMapping("/existence")
+    public CommonResponse<Boolean> getExistence(@Valid CheckExistenceUserDTO dto) {
+        return CommonResponse.success(userAnService.getExistence(dto));
     }
 
 }

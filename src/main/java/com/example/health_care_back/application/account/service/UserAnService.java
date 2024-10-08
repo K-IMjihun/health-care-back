@@ -1,5 +1,6 @@
 package com.example.health_care_back.application.account.service;
 
+import com.example.health_care_back.application.account.controller.dto.CheckExistenceUserDTO;
 import com.example.health_care_back.application.account.controller.dto.CreateUserDTO;
 import com.example.health_care_back.application.account.domain.User;
 import com.example.health_care_back.application.account.repository.UserRepository;
@@ -27,5 +28,9 @@ public class UserAnService {
         String encodedPassword = passwordEncoder.encode(dto.newPassword());
         User user = new User(dto, encodedPassword);
         userRepository.save(user);
+    }
+
+    public Boolean getExistence(CheckExistenceUserDTO dto) {
+        return userRepository.findByEmail(dto.email()).isPresent();
     }
 }
