@@ -1,6 +1,7 @@
 package com.example.health_care_back.application.account.service;
 
 import com.example.health_care_back.application.account.controller.dto.ConfirmPasswordUserDTO;
+import com.example.health_care_back.application.account.controller.dto.DeleteUserDTO;
 import com.example.health_care_back.application.account.domain.User;
 import com.example.health_care_back.application.account.domain.code.UserStatus;
 import com.example.health_care_back.application.account.repository.UserRepository;
@@ -43,4 +44,18 @@ public class UserCmService {
 
         return passwordEncoder.matches(dto.password(), user.getPassword());
     }
+
+    @Transactional
+    public void deleteUser(LoginUser loginUser, Long userId, DeleteUserDTO dto) {
+        User user = userRepository.findByIdAndUserStatusIs(userId, UserStatus.ACTIVATED)
+                .orElseThrow(() -> new ResourceException(ResourceExceptionCode.RESOURCE_NOT_FOUND));
+
+        if (!user.getId().equals(loginUser.getId())) {
+            throw new AuthException(AuthExceptionCode.NOT_AUTHORIZED);
+        }
+
+        user.updateUserStatus(dto.userStatus());
+        userRepository.save(user);
+    }
+
 }

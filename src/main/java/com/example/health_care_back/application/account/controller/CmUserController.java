@@ -1,6 +1,7 @@
 package com.example.health_care_back.application.account.controller;
 
 import com.example.health_care_back.application.account.controller.dto.ConfirmPasswordUserDTO;
+import com.example.health_care_back.application.account.controller.dto.DeleteUserDTO;
 import com.example.health_care_back.application.account.service.UserCmService;
 import com.example.health_care_back.application.common.response.CommonResponse;
 import com.example.health_care_back.application.vo.UserVO;
@@ -25,10 +26,20 @@ public class CmUserController {
     return CommonResponse.success(userCmService.getUser(loginUser, userId));
   }
 
+  // 비밀번호 확인
   @PostMapping(value = "/{user-id}/confirm:password", consumes = MediaType.APPLICATION_JSON_VALUE)
   public CommonResponse<Boolean> confirmPassword(@PathVariable(value = "user-id") Long userId,
                                                  @Valid @RequestBody ConfirmPasswordUserDTO dto,
                                                  @AuthenticationPrincipal LoginUser loginUser) {
     return CommonResponse.success(userCmService.confirmPassword(loginUser, userId, dto));
+  }
+
+  //회원 탈퇴
+  @DeleteMapping(value = "/{user-id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+  public CommonResponse<Boolean> deleteUser(@PathVariable(value = "user-id") Long userId,
+                                            @Valid @RequestBody DeleteUserDTO dto,
+                                            @AuthenticationPrincipal LoginUser loginUser) {
+    userCmService.deleteUser(loginUser, userId, dto);
+    return CommonResponse.success();
   }
 }
