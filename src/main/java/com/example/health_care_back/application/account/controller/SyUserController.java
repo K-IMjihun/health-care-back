@@ -18,18 +18,17 @@ public class SyUserController {
 
   private final UserSyService userSyService;
 
+  // 유저 조회
+  @GetMapping
+  public CommonResponse<Page<UserVO>> getUsers(@Valid SearchUserDTO dto) {
+    return CommonResponse.success(userSyService.getUsers(dto));
+  }
+
   // 권한 수정
   @PutMapping(value = "/{user-id}/authority", consumes = MediaType.APPLICATION_JSON_VALUE)
   public void changeAuthority(
     @PathVariable(value = "user-id") long userId,
     @Valid @RequestBody ChangeAuthorityDTO dto) {
     userSyService.changeAuthority(userId, dto);
-  }
-
-  // 유저 조회
-  @GetMapping
-  public CommonResponse<Page<UserVO>> getUsers(
-          @Valid SearchUserDTO dto) {
-    return CommonResponse.success(userSyService.getUsers(dto));
   }
 }

@@ -1,4 +1,4 @@
-package com.example.health_care_back.util;
+package com.example.health_care_back.util.dto;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
